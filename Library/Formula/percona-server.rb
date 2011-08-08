@@ -23,8 +23,11 @@ class PerconaServer < Formula
       <true/>
       <key>Label</key>
       <string>com.percona.mysqld</string>
-      <key>Program</key>
-      <string>#{bin}/mysqld_safe</string>
+      <key>ProgramArguments</key>
+      <array>
+        <string>#{bin}/mysqld_safe</string>
+        <string>--datadir=#{var}/mysql</string>
+      </array>
       <key>RunAtLoad</key>
       <true/>
       <key>UserName</key>
