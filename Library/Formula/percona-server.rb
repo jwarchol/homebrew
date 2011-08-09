@@ -27,6 +27,7 @@ class PerconaServer < Formula
       <array>
         <string>#{bin}/mysqld_safe</string>
         <string>--datadir=#{var}/mysql</string>
+        <string>--max_allowed_packet=16M</string>
       </array>
       <key>RunAtLoad</key>
       <true/>
