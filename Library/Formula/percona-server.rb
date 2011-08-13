@@ -8,7 +8,8 @@ class PerconaServer < Formula
 
   def install
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
-                          "--prefix=#{prefix}", "--mandir=#{man}", "--infodir=#{info}"
+                          "--prefix=#{prefix}", "--mandir=#{man}", "--infodir=#{info}",
+                          "--without-plugin-innobase", "--with-plugin-innodb_plugin"
     system "make install"
     (prefix+'com.percona.mysqld.plist').write startup_plist
 
