@@ -12,6 +12,7 @@ class PerconaServer < Formula
                           "--without-plugin-innobase", "--with-plugin-innodb_plugin"
     system "make install"
     (prefix+'com.percona.mysqld.plist').write startup_plist
+    (prefix+'etc/my.cnf').write defaults_file
 
   end
 
@@ -28,7 +29,6 @@ class PerconaServer < Formula
       <array>
         <string>#{bin}/mysqld_safe</string>
         <string>--datadir=#{var}/mysql</string>
-        <string>--max_allowed_packet=16M</string>
       </array>
       <key>RunAtLoad</key>
       <true/>
@@ -39,6 +39,13 @@ class PerconaServer < Formula
     </dict>
     </plist>
     EOPLIST
+  end
+
+  def defaults_file; <<-EODEFAULTS.undent
+    [myslqd]
+    max_allowed_packet=16M
+    default-storage-engine=InnoDB
+    EODEFAULTS
   end
 
 end
