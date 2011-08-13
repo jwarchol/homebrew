@@ -42,7 +42,7 @@ class PerconaServer < Formula
   end
 
   def defaults_file; <<-EODEFAULTS.undent
-    [myslqd]
+    [mysqld]
     max_allowed_packet=16M
     default-storage-engine=InnoDB
     EODEFAULTS
