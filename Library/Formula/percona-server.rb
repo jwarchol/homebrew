@@ -1,15 +1,13 @@
 require 'formula'
 
 class PerconaServer < Formula
-  url 'http://www.percona.com/downloads/Percona-Server-5.1/Percona-Server-5.1.57-12.8/source/Percona-Server-5.1.57.tar.gz'
+  url 'http://www.percona.com/downloads/Percona-Server-5.5/Percona-Server-5.5.16-22.0/source/Percona-Server-5.5.16-rel22.0.tar.gz'
   homepage 'http://www.percona.com'
   md5 '4268926cb5d56df3db61396a41b1475b'
-  version '5.1.57-12.8'
+  version '5.5.16-rel22.0'
 
   def install
-    system "./configure", "--disable-debug", "--disable-dependency-tracking",
-                          "--prefix=#{prefix}", "--mandir=#{man}", "--infodir=#{info}",
-                          "--without-plugin-innobase", "--with-plugin-innodb_plugin"
+    system "cmake", '.', '-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_CONFIG=mysql_release -DFEATURE_SET=community -DWITH_EMBEDDED_SERVER=OFF'
     system "make install"
     (prefix+'com.percona.mysqld.plist').write startup_plist
     (prefix+'etc/my.cnf').write defaults_file
